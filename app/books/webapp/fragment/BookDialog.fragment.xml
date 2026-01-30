@@ -1,0 +1,27 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form">
+    <Dialog id="bookDialog" title="{= ${ID} !== null ? ${i18n>dialogEditTitle} : ${i18n>dialogCreateTitle} }">
+        <content>
+            <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                <f:content>
+                    <Label text="{i18n>bookID}" required="true" />
+                    <Input value="{ID}" editable="{= ${ID} === null }" type="Number" placeholder="Enter original ID..."/>
+                    
+                    <Label text="{i18n>bookTitle}" required="true" />
+                    <Input value="{title}" placeholder="Enter book title..."/>
+                    
+                    <Label text="{i18n>bookStock}" />
+                    <StepInput value="{stock}" min="0" />
+                </f:content>
+            </f:SimpleForm>
+        </content>
+        <beginButton>
+            <Button text="{i18n>btnSave}" type="Emphasized" press=".onSaveDialog" />
+        </beginButton>
+        <endButton>
+            <Button text="{i18n>btnCancel}" press=".onCancelDialog" />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

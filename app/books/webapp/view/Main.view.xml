@@ -4,9 +4,31 @@
     xmlns="sap.m"
     xmlns:f="sap.f"
     xmlns:layout="sap.ui.layout">
-    <Page id="page" title="{i18n>appTitle}">
-        <content>
+    <f:DynamicPage id="dynamicPageId" headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="{i18n>appTitle}"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader>
+                <layout:HorizontalLayout allowWrapping="true">
+                    <SearchField 
+                        id="searchField" 
+                        search=".onSearch" 
+                        width="300px" 
+                        placeholder="Search by title..."/>
+                </layout:HorizontalLayout>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
             <Table id="booksTable"
+                mode="SingleSelectLeft"
+                selectionChange=".onSelectionChange"
+                sticky="HeaderToolbar,InfoToolbar,ColumnHeaders"
+                inset="false"
                 items="{
                     path: '/Books',
                     sorter: {
@@ -17,30 +39,53 @@
                     <OverflowToolbar>
                         <Title text="{i18n>booksTitle}" level="H2"/>
                         <ToolbarSpacer/>
-                        <Button icon="sap-icon://refresh" press="onRefresh" />
+                        <Button 
+                            text="{i18n>btnCreate}" 
+                            type="Emphasized" 
+                            icon="sap-icon://add" 
+                            press=".onCreate" />
+                        <Button 
+                            id="editButton"
+                            text="{i18n>btnEdit}" 
+                            icon="sap-icon://edit" 
+                            enabled="false"
+                            press=".onEdit" />
+                        <Button 
+                            id="deleteButton"
+                            text="{i18n>btnDelete}" 
+                            type="Reject" 
+                            icon="sap-icon://delete" 
+                            enabled="false"
+                            press=".onDelete" />
+                        <Button 
+                            icon="sap-icon://refresh" 
+                            press=".onRefresh" />
                     </OverflowToolbar>
                 </headerToolbar>
                 <columns>
-                    <Column>
+                    <Column width="5rem">
                         <Text text="{i18n>bookID}" />
                     </Column>
-                    <Column>
+                    <Column minScreenWidth="Tablet" demandPopin="true">
                         <Text text="{i18n>bookTitle}" />
                     </Column>
-                    <Column>
+                    <Column width="8rem" hAlign="End">
                         <Text text="{i18n>bookStock}" />
                     </Column>
                 </columns>
                 <items>
-                    <ColumnListItem>
+                    <ColumnListItem type="Active" press=".onSelectionChange">
                         <cells>
                             <Text text="{ID}" />
-                            <Text text="{title}" />
-                            <Text text="{stock}" />
+                            <ObjectIdentifier title="{title}" />
+                            <ObjectNumber
+                                number="{stock}"
+                                unit="pcs"
+                                state="{= ${stock} > 10 ? 'Success' : 'Warning' }"/>
                         </cells>
                     </ColumnListItem>
                 </items>
             </Table>
-        </content>
-    </Page>
+        </f:content>
+    </f:DynamicPage>
 </mvc:View>

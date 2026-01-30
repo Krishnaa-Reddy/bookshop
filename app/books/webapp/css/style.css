@@ -1,0 +1,28 @@
+/* Custom styles for professional look */
+
+.sapMPageHeader {
+  background-color: #f7f7f7 !important;
+}
+
+/* Add a subtle shadow to the table */
+.sapMList {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin: 1rem;
+}
+
+/* Professional spacing for the search field */
+.sapMSF {
+  margin-right: 1rem;
+}
+
+/* Highlight the Selected row nicely */
+.sapMLIBSelected {
+  background-color: #eaf3ff !important;
+}
+
+/* Status colors */
+.sapMObjectNumberStatusSuccess .sapMObjectNumberText {
+  font-weight: bold;
+}
