@@ -1,0 +1,46 @@
+<mvc:View
+    controllerName="ns.books.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:layout="sap.ui.layout">
+    <Page id="page" title="{i18n>appTitle}">
+        <content>
+            <Table id="booksTable"
+                items="{
+                    path: '/Books',
+                    sorter: {
+                        path: 'title'
+                    }
+                }">
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title text="{i18n>booksTitle}" level="H2"/>
+                        <ToolbarSpacer/>
+                        <Button icon="sap-icon://refresh" press="onRefresh" />
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column>
+                        <Text text="{i18n>bookID}" />
+                    </Column>
+                    <Column>
+                        <Text text="{i18n>bookTitle}" />
+                    </Column>
+                    <Column>
+                        <Text text="{i18n>bookStock}" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="{ID}" />
+                            <Text text="{title}" />
+                            <Text text="{stock}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+    </Page>
+</mvc:View>
