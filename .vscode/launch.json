@@ -2,6 +2,13 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "java",
+      "name": "Application",
+      "request": "launch",
+      "mainClass": "customer.bookshop.Application",
+      "projectName": "bookshop"
+    },
+    {
       "name": "cds serve",
       "request": "launch",
       "type": "node",

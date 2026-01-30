@@ -4,6 +4,7 @@
   "description": "A simple CAP project.",
   "dependencies": {
     "@sap/cds": "^9",
+    "better-sqlite3": "^12.6.2",
     "express": "^4"
   },
   "devDependencies": {

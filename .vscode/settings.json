@@ -7,5 +7,6 @@
     // "csv (semicolon)",
     // "tab",
     // "tsv"
-  ]
+  ],
+  "java.configuration.updateBuildConfiguration": "interactive"
 }
