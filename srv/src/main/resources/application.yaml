@@ -1,8 +1,14 @@
 spring:
   datasource:
-    url: "jdbc:sqlite:db.sqlite"
+    # Use env var. 
+    # Run this: $env:APP_DB_FILE = (Resolve-Path .\db.sqlite).Path
+    url: "jdbc:sqlite:${APP_DB_FILE:db.sqlite}"
     driver-class-name: org.sqlite.JDBC
-
 cds:
   dataSource:
     kind: sqlite
+
+# Let me use the below logging only when necessary
+# logging:
+#   level:
+#     com.sap.cds.impl.JDBCClient: DEBUG

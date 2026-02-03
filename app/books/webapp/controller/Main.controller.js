@@ -95,20 +95,14 @@ sap.ui.define([
         onSaveDialog: function () {
             var oModel = this.getView().getModel();
             var bCreate = this._oContext.isTransient();
-
-            // In OData V4 with $auto, changes are sent automatically.
-            // We just need to ensure everything is valid and close the dialog.
             this.byId("bookDialog").setBusy(true);
             
-            // We can wait for the specific context to be created/updated
             this._oContext.created().then(function() {
                 this.byId("bookDialog").setBusy(false);
                 this.byId("bookDialog").close();
                 MessageToast.show(this.getView().getModel("i18n").getResourceBundle().getText(bCreate ? "msgCreateSuccess" : "msgUpdateSuccess"));
             }.bind(this)).catch(function(oError) {
                 this.byId("bookDialog").setBusy(false);
-                // If it's not transient, created() might reject if it's just an update
-                // So we check if it's just a regular save
                 if (!bCreate) {
                     this.byId("bookDialog").close();
                     MessageToast.show(this.getView().getModel("i18n").getResourceBundle().getText("msgUpdateSuccess"));
@@ -116,8 +110,6 @@ sap.ui.define([
                     MessageBox.error(oError.message);
                 }
             }.bind(this));
-
-            // If it's not a create, we don't have a 'created' promise to wait for in the same way for updates
             if (!bCreate) {
                 this.byId("bookDialog").setBusy(false);
                 this.byId("bookDialog").close();
@@ -126,7 +118,6 @@ sap.ui.define([
         },
 
         onCancelDialog: function () {
-            // Reset changes or delete transient context
             if (this._oContext.isTransient()) {
                 this._oContext.delete();
             } else {
